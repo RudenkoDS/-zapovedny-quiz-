@@ -203,7 +203,6 @@
     get state() {
       return { ...state, answers: { ...state.answers } };
     },
-    getUTMParams,
-    submitLead
+    getUTMParams
   };
 })();
