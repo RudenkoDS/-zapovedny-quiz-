@@ -1,0 +1,16 @@
+node_modules/
+.ruvector.db
+ruvector.db
+.swarm/
+previews/
+.DS_Store
+*.log
+.env
+.v2/
+docs/
+image_prompts.md
+direct_ads_drafts.md
+AUDIT_AND_NEXT_STEPS.md
+IMAGE_REGEN_PLAN.md
+RESPONSIVE_QA.md
+README.md

@@ -1,0 +1,813 @@
+#zapovedny-comic {
+  --bg: #FFF8EC;
+  --green: #244A35;
+  --green-deep: #173424;
+  --coral: #E76F51;
+  --yellow: #FFD166;
+  --text: #1E1E1E;
+  --cream: #FFFDF8;
+  --white: #FFFFFF;
+  --blue-mid: #7BA3C9;
+  --outline: 3px solid #244A35;
+  --shadow: 12px 12px 0 rgba(36, 74, 53, 0.22);
+  font-family: 'Manrope', Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    radial-gradient(circle at 14% 6%, rgba(255, 209, 102, 0.15), transparent 28%),
+    radial-gradient(circle at 90% 18%, rgba(221, 238, 219, 0.7), transparent 34%),
+    repeating-linear-gradient(90deg, rgba(36,74,53,0.02) 0 1px, transparent 1px 6vw),
+    repeating-linear-gradient(0deg, rgba(36,74,53,0.015) 0 1px, transparent 1px 6vh),
+    var(--bg);
+  color: var(--text);
+  line-height: 1.4;
+  overflow-x: clip;
+}
+
+#zapovedny-comic *, #zapovedny-comic *::before, #zapovedny-comic *::after {
+  box-sizing: border-box;
+}
+
+#zapovedny-comic h1, #zapovedny-comic h2, #zapovedny-comic h3,
+#zapovedny-comic p, #zapovedny-comic figure { margin: 0; }
+
+/* ============= NAVIGATION ============= */
+#zapovedny-comic .comic-rail {
+  position: fixed; left: 50%; top: 8px; z-index: 100;
+  display: flex; gap: 3px;
+  border: 2px solid var(--green);
+  padding: 4px 8px; background: var(--cream);
+  box-shadow: 4px 4px 0 rgba(36, 74, 53, 0.18);
+  transform: translateX(-50%);
+  width: max-content; max-width: calc(100% - 16px);
+  overflow-x: auto; scrollbar-width: none;
+  border-radius: 0;
+}
+#zapovedny-comic .comic-rail::-webkit-scrollbar { display: none; }
+#zapovedny-comic .comic-rail a {
+  min-height: 26px; display: inline-flex; align-items: center;
+  border: 2px solid transparent; padding: 4px 10px;
+  color: var(--green); font-size: 11px; font-weight: 900;
+  text-decoration: none; white-space: nowrap;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+#zapovedny-comic .comic-rail a:hover { border-color: var(--green); background: var(--bg); }
+
+/* ============= PAGES ============= */
+#zapovedny-comic .comic-page {
+  min-height: 100svh; display: flex; align-items: center;
+  padding: 48px 0 68px; position: relative;
+  scroll-margin-top: 80px;
+}
+#zapovedny-comic .comic-page--quiz,
+#zapovedny-comic .comic-page--opportunity {
+  scroll-margin-top: 60px;
+}
+#zapovedny-comic .comic-cover {
+  min-height: auto; height: 100dvh; padding: 52px 0 0; position: relative;
+  display: flex; flex-direction: column;
+}
+#zapovedny-comic .comic-cover__kicker {
+  text-align: center; padding: 8px 20px;
+  margin: 0 auto 0; width: 100%; max-width: 100%;
+  background: var(--green); color: var(--cream);
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.08em; position: relative; z-index: 2;
+}
+#zapovedny-comic .comic-cover .comic-spread {
+  flex: 1; align-content: center;
+}
+#zapovedny-comic .comic-page::after {
+  content: ''; position: absolute; left: 50%; bottom: 24px;
+  width: min(300px, 50vw); height: 6px;
+  background: repeating-linear-gradient(90deg, var(--green) 0 16px, transparent 16px 28px);
+  transform: translateX(-50%); opacity: 0.15;
+}
+#zapovedny-comic .comic-page--quiz::after { display: none; }
+
+/* ============= SPREADS (comic-style, no grid symmetry) ============= */
+#zapovedny-comic .comic-spread {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(12px, 3vw, 40px);
+  align-items: start;
+}
+
+/* Mobile: single column everything */
+#zapovedny-comic .comic-spread { grid-template-columns: 1fr; }
+
+/* ============= COMIC PANELS ============= */
+#zapovedny-comic .comic-panel {
+  position: relative; overflow: hidden;
+  border: 4px solid var(--green);
+  box-shadow: var(--shadow);
+  background:
+    radial-gradient(circle at 22% 18%, rgba(255, 209, 102, 0.25), transparent 20%),
+    radial-gradient(circle at 78% 20%, rgba(231, 111, 81, 0.12), transparent 24%),
+    linear-gradient(135deg, var(--cream), #DDEEDB 58%, #F8E6CE);
+}
+#zapovedny-comic .comic-panel::before {
+  content: ''; position: absolute; inset: 0; z-index: 3;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  opacity: 0.04; mix-blend-mode: multiply;
+}
+#zapovedny-comic .comic-panel::after {
+  content: '✦'; position: absolute; bottom: 8px; right: 14px;
+  z-index: 3; font-size: 22px; color: var(--green);
+  opacity: 0.12; pointer-events: none; line-height: 1;
+}
+#zapovedny-comic .comic-panel--hero::after { content: '◆'; color: var(--coral); }
+#zapovedny-comic .comic-panel--wing::after { content: '○'; }
+#zapovedny-comic .comic-panel--house::after { content: '▲'; color: var(--yellow); }
+#zapovedny-comic .comic-panel--final::after { content: '★'; color: var(--green); opacity: 0.2; }
+
+#zapovedny-comic .comic-panel img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; position: relative; z-index: 2;
+}
+#zapovedny-comic .comic-panel img[alt] { font-size: 0; color: transparent; }
+
+#zapovedny-comic .comic-panel__halftone {
+  position: absolute; inset: 0; z-index: 4;
+  background-image: radial-gradient(var(--green) 1.2px, transparent 1.2px);
+  background-size: 16px 16px; opacity: 0.07;
+  pointer-events: none; mix-blend-mode: multiply;
+}
+
+/* Panel aspect ratios */
+#zapovedny-comic .comic-panel--hero { aspect-ratio: 16 / 10; }
+#zapovedny-comic .comic-panel--wing { aspect-ratio: 16 / 10; }
+#zapovedny-comic .comic-panel--house { aspect-ratio: 16 / 10; }
+#zapovedny-comic .comic-panel--final { aspect-ratio: 16 / 10; }
+#zapovedny-comic .comic-panel--wing {
+  background:
+    radial-gradient(circle at 65% 20%, rgba(197, 217, 232, 0.4), transparent 20%),
+    radial-gradient(circle at 30% 70%, rgba(255, 209, 102, 0.2), transparent 24%),
+    linear-gradient(135deg, var(--cream), #C5D9E8 48%, #DDEEDB);
+}
+
+/* ============= TYPOGRAPHY ============= */
+#zapovedny-comic .comic-kicker {
+  display: inline-block; width: fit-content;
+  padding: 6px 16px; margin: 0 0 4px;
+  border: 2px solid var(--coral);
+  background: var(--cream);
+  color: var(--coral);
+  font-size: clamp(13px, 1.2vw, 16px);
+  font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+#zapovedny-comic .comic-kicker--fear { border-color: var(--blue-mid, #7BA3C9); color: var(--blue-mid, #7BA3C9); }
+#zapovedny-comic .comic-kicker--calc { border-color: var(--yellow); color: var(--green); background: var(--yellow); }
+#zapovedny-comic .comic-kicker--check { border-color: var(--green); color: var(--green); background: var(--yellow); }
+
+#zapovedny-comic .comic-title {
+  color: var(--green);
+  font-size: clamp(36px, 9vw, 72px);
+  line-height: 0.95;
+  font-weight: 900; text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+#zapovedny-comic .comic-cover .comic-title {
+  font-size: clamp(40px, 11vw, 88px);
+}
+
+#zapovedny-comic .comic-lead {
+  font-size: clamp(16px, 1.6vw, 20px);
+  max-width: 620px; line-height: 1.45;
+  color: var(--text);
+}
+#zapovedny-comic .comic-lead--big {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700; color: var(--green);
+}
+
+/* Short/long text toggle */
+#zapovedny-comic .comic-lead__full { display: none; }
+#zapovedny-comic .comic-lead__short { display: block; }
+
+#zapovedny-comic .comic-copy {
+  display: grid; gap: clamp(12px, 2vw, 20px);
+}
+#zapovedny-comic .comic-cover .comic-copy {
+  gap: clamp(6px, 1vw, 12px);
+}
+#zapovedny-comic .comic-cover .comic-bubbles {
+  gap: 4px;
+}
+#zapovedny-comic .comic-cover .comic-stickers {
+  gap: 4px;
+}
+#zapovedny-comic .comic-cover .sticker {
+  min-height: 30px; padding: 4px 12px; font-size: clamp(11px, 0.9vw, 13px);
+}
+#zapovedny-comic .comic-cover .comic-lead {
+  font-size: clamp(12px, 1vw, 14px);
+  max-width: 100%;
+}
+#zapovedny-comic .comic-cover .speech {
+  padding: 4px 24px 4px 4px; font-size: clamp(11px, 0.9vw, 13px); max-width: 100%;
+}
+#zapovedny-comic .comic-cover .speech > img {
+  width: 28px; height: 28px; flex: 0 0 28px;
+}
+#zapovedny-comic .comic-cover .comic-cta {
+  min-height: 44px; padding: 10px 20px; font-size: clamp(13px, 1.1vw, 15px);
+}
+#zapovedny-comic .comic-cover .comic-title {
+  font-size: clamp(34px, 7vw, 72px);
+}
+#zapovedny-comic .comic-cover .comic-stickers { margin-bottom: 2px; }
+
+/* ============= STICKERS ============= */
+#zapovedny-comic .comic-stickers {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+#zapovedny-comic .sticker {
+  display: inline-flex; align-items: center;
+  min-height: 44px; padding: 10px 20px;
+  border: 3px solid var(--green);
+  font-weight: 900;
+  font-size: clamp(14px, 1.4vw, 18px);
+  box-shadow: var(--shadow);
+  transform: rotate(var(--rot, 0deg));
+  background: var(--cream); color: var(--green);
+}
+#zapovedny-comic .sticker:hover {
+  transform: rotate(var(--rot, 0deg)) translateY(-2px);
+  box-shadow: 14px 14px 0 rgba(36, 74, 53, 0.25);
+}
+#zapovedny-comic .sticker--green { background: var(--green); color: var(--cream); border-color: var(--green); --rot: -1deg; }
+#zapovedny-comic .sticker--coral { background: var(--coral); color: var(--cream); border-color: var(--coral); --rot: 1.5deg; }
+#zapovedny-comic .sticker--yellow { background: var(--yellow); color: var(--green); border-color: var(--green); --rot: -1.5deg; }
+#zapovedny-comic .sticker--xl { min-height: 56px; padding: 14px 28px; font-size: clamp(18px, 1.8vw, 26px); }
+#zapovedny-comic .sticker--note { border-style: dashed; font-style: italic; transform: rotate(0.5deg); width: fit-content; }
+#zapovedny-comic .comic-stickers--big { gap: 12px; }
+
+/* ============= SPEECH BUBBLES ============= */
+#zapovedny-comic .comic-bubbles {
+  display: grid; gap: 12px;
+}
+
+#zapovedny-comic .speech {
+  width: fit-content; max-width: min(100%, 520px);
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 36px 10px 10px;
+  border: 3px solid var(--green);
+  background: var(--cream);
+  box-shadow: 6px 6px 0 rgba(36, 74, 53, 0.15);
+  position: relative;
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.3;
+}
+
+#zapovedny-comic .speech > img {
+  width: 44px; height: 44px; flex: 0 0 44px;
+  border: 2px solid var(--green);
+  object-fit: cover; background: var(--bg);
+}
+
+#zapovedny-comic .speech strong { color: var(--green); }
+
+#zapovedny-comic .speech::after {
+  position: absolute; top: 4px; right: 10px;
+  font-size: 18px; font-weight: 900; line-height: 1;
+}
+#zapovedny-comic .speech--dima::after { content: '?'; color: var(--coral); }
+#zapovedny-comic .speech--natasha::after { content: '✦'; color: var(--green); }
+
+/* Bubble tails */
+#zapovedny-comic .speech--dima { border-bottom-left-radius: 0; border-left: 0; }
+#zapovedny-comic .speech--natasha { border-bottom-right-radius: 0; background: #DDEEDB; }
+
+/* ============= PANIC THOUGHTS ============= */
+#zapovedny-comic .panic-bubbles {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+#zapovedny-comic .thought {
+  padding: 10px 20px;
+  border: 2px dashed var(--blue-mid, #7BA3C9);
+  background: rgba(197, 217, 232, 0.2);
+  font-weight: 800;
+  font-size: clamp(14px, 1.2vw, 17px);
+  font-style: italic;
+  box-shadow: 4px 4px 0 rgba(123, 163, 201, 0.15);
+}
+#zapovedny-comic .thought--fear {
+  border-color: var(--coral);
+  background: rgba(231, 111, 81, 0.1);
+  box-shadow: 4px 4px 0 rgba(231, 111, 81, 0.12);
+}
+
+/* ============= CHECKLIST ============= */
+#zapovedny-comic .comic-checklist {
+  display: grid; gap: clamp(14px, 2vw, 22px);
+}
+#zapovedny-comic #scene-4 .comic-title {
+  font-size: clamp(28px, 4.5vw, 56px);
+}
+#zapovedny-comic .checklist-board {
+  display: grid; gap: 14px;
+  padding: clamp(24px, 3vw, 36px);
+  border: 4px solid var(--green);
+  background: rgba(255, 253, 248, 0.95);
+  box-shadow: var(--shadow);
+}
+#zapovedny-comic .check-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 18px;
+  border: 2px solid rgba(36, 74, 53, 0.15);
+  background: var(--white);
+  font-weight: 800;
+  font-size: clamp(15px, 1.3vw, 18px);
+  color: var(--green);
+  box-shadow: 3px 3px 0 rgba(36, 74, 53, 0.1);
+}
+#zapovedny-comic .check-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--green); color: var(--cream);
+  font-size: 18px; font-weight: 900; flex-shrink: 0;
+  border: 2px solid var(--green);
+  box-shadow: 2px 2px 0 rgba(36, 74, 53, 0.15);
+}
+
+/* ============= QUIZ ============= */
+#zapovedny-comic .comic-quiz {
+  width: min(800px, calc(100% - 32px));
+  margin: 0 auto; display: grid; gap: 28px;
+}
+#zapovedny-comic .comic-quiz__header {
+  text-align: center; display: grid; gap: 12px; justify-items: center;
+}
+#zapovedny-comic .comic-quiz__header .comic-title {
+  font-size: clamp(30px, 5vw, 56px); text-align: center;
+}
+#zapovedny-comic .comic-quiz__header .comic-lead {
+  text-align: center; max-width: 600px;
+}
+#zapovedny-comic .comic-quiz__card {
+  border: 4px solid var(--green);
+  padding: clamp(24px, 3vw, 36px);
+  background: var(--cream);
+  box-shadow: var(--shadow);
+}
+#zapovedny-comic .comic-quiz__progress {
+  display: grid; gap: 8px; margin-bottom: 24px;
+  font-weight: 900; color: var(--green);
+  font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;
+}
+#zapovedny-comic .comic-quiz__track {
+  height: 14px; border: 2px solid var(--green);
+  background: var(--bg); overflow: hidden;
+}
+#zapovedny-comic .comic-quiz__track span {
+  display: block; height: 100%; background: var(--coral);
+  transition: width 220ms ease;
+}
+#zapovedny-comic .comic-quiz__form fieldset {
+  border: 0; margin: 0; padding: 0;
+}
+#zapovedny-comic .comic-step { display: none; }
+#zapovedny-comic .comic-step.is-active { display: grid; gap: 12px; }
+#zapovedny-comic .comic-step--lead.is-active { gap: 18px; }
+
+#zapovedny-comic .comic-step legend,
+#zapovedny-comic .comic-step--lead h3 {
+  color: var(--green);
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 900; line-height: 1.12; margin-bottom: 4px;
+}
+
+#zapovedny-comic .comic-option {
+  min-height: 56px; display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  border: 3px solid rgba(36, 74, 53, 0.2);
+  background: var(--white);
+  cursor: pointer; font-weight: 700;
+  font-size: clamp(15px, 1.3vw, 18px);
+  transition: border-color 160ms, transform 160ms, box-shadow 160ms;
+  box-shadow: 4px 4px 0 rgba(36, 74, 53, 0.1);
+}
+#zapovedny-comic .comic-option:hover {
+  border-color: var(--green);
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0 rgba(36, 74, 53, 0.15);
+}
+#zapovedny-comic input[type='radio'] { accent-color: var(--green); width: 20px; height: 20px; flex-shrink: 0; }
+#zapovedny-comic .comic-option:has(input:checked) {
+  border-color: var(--green); background: #DDEEDB;
+  box-shadow: 6px 6px 0 rgba(36, 74, 53, 0.15);
+}
+
+#zapovedny-comic .comic-field {
+  display: grid; gap: 6px; color: var(--green); font-weight: 900; font-size: 14px;
+}
+#zapovedny-comic .comic-field input {
+  min-height: 56px; width: 100%;
+  border: 3px solid rgba(36, 74, 53, 0.2);
+  padding: 0 16px; background: var(--white);
+  color: var(--text); font: inherit; font-size: 16px;
+}
+#zapovedny-comic .comic-field input:focus {
+  outline: none; border-color: var(--green);
+  box-shadow: 4px 4px 0 rgba(36, 74, 53, 0.12);
+}
+
+#zapovedny-comic .comic-quiz__actions {
+  display: flex; flex-direction: column; gap: 12px; margin-top: 20px;
+}
+@media (min-width: 768px) {
+  #zapovedny-comic .comic-quiz__actions { flex-direction: row; }
+  #zapovedny-comic .comic-quiz__actions .comic-btn--ghost { flex: 0 0 auto; }
+  #zapovedny-comic .comic-quiz__actions .comic-btn--next,
+  #zapovedny-comic .comic-quiz__actions .comic-cta { flex: 1; }
+}
+#zapovedny-comic .comic-error {
+  min-height: 24px; margin-top: 12px; color: var(--coral); font-weight: 900; font-size: 14px;
+}
+#zapovedny-comic .comic-note {
+  margin: 10px 0 0; color: rgba(30, 30, 30, 0.5); font-size: 13px;
+}
+
+/* Thanks */
+#zapovedny-comic .comic-thanks__panel {
+  padding: 10px 0; display: grid; gap: 20px;
+}
+#zapovedny-comic .comic-thanks__panel h3 {
+  color: var(--green); font-size: clamp(30px, 4vw, 44px); font-weight: 900;
+}
+#zapovedny-comic .comic-thanks__sub {
+  max-width: 580px; line-height: 1.5;
+  font-size: clamp(15px, 1.3vw, 17px);
+}
+#zapovedny-comic .comic-thanks__wing-block {
+  display: grid; grid-template-columns: auto 1fr; gap: 14px;
+  padding: clamp(14px, 2vw, 20px);
+  border: 3px solid rgba(36,74,53,0.15);
+  background: rgba(255, 253, 248, 0.8);
+  box-shadow: 4px 4px 0 rgba(36,74,53,0.1);
+}
+#zapovedny-comic .comic-thanks__wing-icon {
+  width: clamp(48px, 5vw, 64px); height: clamp(48px, 5vw, 64px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(28px, 3vw, 36px);
+  border: 3px solid var(--green);
+  background: var(--yellow); color: var(--green-deep);
+  box-shadow: 4px 4px 0 rgba(36,74,53,0.12);
+  transform: rotate(-90deg);
+}
+#zapovedny-comic .comic-thanks__wing-text {
+  display: grid; gap: 6px;
+  font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5;
+}
+#zapovedny-comic .comic-thanks__wing-text strong {
+  color: var(--green); font-size: clamp(16px, 1.4vw, 19px);
+  text-transform: uppercase; letter-spacing: 0.03em;
+}
+#zapovedny-comic .comic-thanks__footnote {
+  color: rgba(30,30,30,0.5);
+  font-size: clamp(12px, 1vw, 14px);
+  font-style: italic; max-width: 520px; line-height: 1.4;
+}
+#zapovedny-comic .comic-thanks__panel .sticker { border-style: dashed; transform: rotate(-0.5deg); }
+
+/* Mobile thanks */
+@media (max-width: 430px) {
+  #zapovedny-comic .comic-thanks__wing-block {
+    grid-template-columns: 1fr; gap: 10px;
+  }
+  #zapovedny-comic .comic-thanks__wing-icon {
+    width: 40px; height: 40px; font-size: 22px;
+    transform: rotate(0deg);
+    justify-self: start;
+  }
+}
+
+/* ============= CTA BUTTONS ============= */
+#zapovedny-comic .comic-cta {
+  min-height: 60px; width: 100%;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 4px solid var(--green);
+  padding: 16px 32px;
+  background: var(--green); color: var(--cream);
+  font: inherit; font-weight: 900;
+  font-size: clamp(17px, 1.6vw, 22px);
+  text-decoration: none; cursor: pointer;
+  box-shadow: 10px 10px 0 rgba(36, 74, 53, 0.22);
+  transition: transform 140ms, box-shadow 140ms;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+#zapovedny-comic .comic-cta:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 14px 14px 0 rgba(36, 74, 53, 0.28);
+}
+
+#zapovedny-comic .comic-btn {
+  min-height: 54px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 3px solid var(--green); padding: 12px 28px;
+  background: var(--cream); color: var(--green);
+  font: inherit; font-weight: 900; font-size: 16px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(36, 74, 53, 0.12);
+  transition: transform 140ms, box-shadow 140ms;
+}
+#zapovedny-comic .comic-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0 rgba(36, 74, 53, 0.16);
+}
+#zapovedny-comic .comic-btn--ghost { border-color: rgba(36, 74, 53, 0.2); box-shadow: none; }
+#zapovedny-comic .comic-btn--next { background: var(--green); color: var(--cream); }
+#zapovedny-comic .comic-btn--next:disabled {
+  opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none;
+}
+
+/* ============= DECORATIVE MARGINALIA ============= */
+#zapovedny-comic .comic-margins {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  overflow: hidden; max-height: 100%;
+}
+#zapovedny-comic .comic-margins > * {
+  position: absolute; font-weight: 900; opacity: 0.08; line-height: 1;
+  color: var(--green); white-space: nowrap; text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+#zapovedny-comic .margin-word--1 { top: 4%; left: -4%; font-size: clamp(10px, 1.4vw, 18px); transform: rotate(-6deg); }
+#zapovedny-comic .margin-word--2 { top: 26%; right: -6%; font-size: clamp(12px, 1.8vw, 24px); transform: rotate(4deg); }
+#zapovedny-comic .margin-word--3 { bottom: 20%; left: -5%; font-size: clamp(10px, 1.2vw, 16px); transform: rotate(-8deg); }
+#zapovedny-comic .margin-word--4 { top: 50%; right: -5%; font-size: clamp(10px, 1.6vw, 20px); transform: rotate(7deg); }
+#zapovedny-comic .margin-word--5 { bottom: 6%; right: -3%; font-size: clamp(9px, 1vw, 14px); transform: rotate(-3deg); }
+#zapovedny-comic .margin-word--6 { top: 14%; left: -3%; font-size: clamp(8px, 1vw, 13px); transform: rotate(9deg); }
+#zapovedny-comic .margin-word--7 { bottom: 40%; right: -4%; font-size: clamp(10px, 1.3vw, 17px); transform: rotate(-5deg); }
+#zapovedny-comic .margin-word--8 { top: 68%; left: -5%; font-size: clamp(9px, 1.1vw, 15px); transform: rotate(3deg); }
+#zapovedny-comic .comic-page > .comic-margins ~ * { position: relative; z-index: 2; }
+
+/* Decorative symbols on margins */
+#zapovedny-comic .comic-page::before {
+  content: ''; position: absolute; z-index: 0; pointer-events: none;
+  font-size: clamp(20px, 2.5vw, 36px); opacity: 0.08;
+  color: var(--green); line-height: 1;
+}
+#zapovedny-comic #scene-1::before {
+  content: '🏠'; top: 14%; left: 2%;
+}
+#zapovedny-comic #scene-2::before {
+  content: '✈'; bottom: 14%; right: 3%;
+}
+#zapovedny-comic #scene-3::before {
+  content: '🔑'; bottom: 12%; left: 3%;
+}
+#zapovedny-comic #scene-4::before {
+  content: '✓'; top: 10%; right: 2%; font-size: clamp(30px, 3vw, 48px);
+}
+#zapovedny-comic #scene-5::before {
+  content: '🏡'; top: 12%; left: 2%;
+}
+#zapovedny-comic .comic-page--opportunity::before {
+  content: '★'; bottom: 6%; right: 3%;
+}
+#zapovedny-comic .comic-page--quiz::before {
+  content: '?'; bottom: 8%; left: 2%; font-size: clamp(24px, 3vw, 40px);
+}
+
+/* ============= OPPORTUNITY BLOCK ============= */
+#zapovedny-comic .comic-page--opportunity {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,209,102,0.12), transparent 36%),
+    radial-gradient(circle at 80% 70%, rgba(221,238,219,0.5), transparent 34%),
+    linear-gradient(162deg, var(--bg), #DDEEDB 22%, #F8E6CE 68%, var(--bg));
+}
+#zapovedny-comic .comic-opportunity {
+  width: min(1000px, calc(100% - 32px));
+  margin: 0 auto; display: grid; gap: clamp(20px, 3vw, 36px);
+}
+#zapovedny-comic .comic-opportunity .comic-title {
+  font-size: clamp(32px, 6vw, 64px); text-align: center;
+}
+#zapovedny-comic .comic-opportunity__kicker {
+  text-align: center; margin: 0 auto;
+  display: inline-block; width: fit-content; justify-self: center;
+  padding: 10px 28px;
+  border: 3px solid var(--coral);
+  background: var(--cream);
+  color: var(--coral);
+  font-size: clamp(12px, 1.3vw, 16px);
+  font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+#zapovedny-comic .comic-opportunity__sub {
+  text-align: center; max-width: 700px; margin: 0 auto;
+  font-size: clamp(15px, 1.4vw, 18px); line-height: 1.5;
+  color: var(--text);
+}
+#zapovedny-comic .comic-opportunity__sticker-grid {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+}
+#zapovedny-comic .comic-opportunity__text {
+  max-width: 680px; margin: 0 auto;
+  font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6;
+  color: var(--text); text-align: center;
+}
+#zapovedny-comic .comic-opportunity__emotion {
+  border: 3px solid var(--green); padding: clamp(16px, 2vw, 24px);
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: var(--shadow);
+  max-width: 720px; margin: 0 auto;
+  font-size: clamp(15px, 1.3vw, 18px); line-height: 1.5;
+  color: var(--green); font-weight: 600; text-align: center;
+}
+
+/* ============= COMPARISON CARDS ============= */
+#zapovedny-comic .comic-compare {
+  display: grid; gap: clamp(12px, 2vw, 20px);
+  grid-template-columns: 1fr;
+}
+#zapovedny-comic .compare-card {
+  border: 3px solid rgba(36, 74, 53, 0.2);
+  padding: clamp(14px, 2vw, 24px);
+  background: var(--cream);
+  box-shadow: 6px 6px 0 rgba(36, 74, 53, 0.1);
+  display: grid; gap: 10px;
+}
+#zapovedny-comic .compare-card__title {
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 900; color: var(--green);
+  padding-bottom: 6px;
+  border-bottom: 3px solid var(--green);
+  text-transform: uppercase; letter-spacing: 0.03em;
+}
+#zapovedny-comic .compare-card ul {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 6px;
+}
+#zapovedny-comic .compare-card li {
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.4; padding-left: 20px;
+  position: relative; color: var(--text);
+}
+#zapovedny-comic .compare-card li::before {
+  content: '—'; position: absolute; left: 0;
+  color: var(--coral); font-weight: 900;
+}
+#zapovedny-comic .compare-card--winner {
+  border-color: var(--green);
+  background: linear-gradient(135deg, var(--cream), #DDEEDB);
+  box-shadow: var(--shadow);
+}
+#zapovedny-comic .compare-card--winner .compare-card__title {
+  color: var(--green-deep);
+}
+#zapovedny-comic .compare-card--winner li::before { content: '✓'; color: var(--green); }
+#zapovedny-comic .compare-card--winner li { font-weight: 700; }
+
+/* ============= QUIZ POLISH ============= */
+#zapovedny-comic .comic-quiz__badge {
+  display: inline-block; width: fit-content; justify-self: center;
+  padding: 8px 24px;
+  border: 3px solid var(--yellow);
+  background: var(--yellow);
+  color: var(--green-deep);
+  font-size: clamp(13px, 1.1vw, 15px);
+  font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: -8px;
+}
+#zapovedny-comic .comic-quiz__card {
+  padding: clamp(28px, 3.5vw, 44px);
+  border-width: 4px;
+  position: relative;
+}
+#zapovedny-comic .comic-quiz__card::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  opacity: 0.03; mix-blend-mode: multiply;
+}
+#zapovedny-comic .comic-quiz__card > * { position: relative; z-index: 1; }
+#zapovedny-comic .comic-quiz__card .comic-quiz__progress { margin-bottom: 28px; }
+#zapovedny-comic .comic-quiz__card .comic-quiz__track { height: 16px; }
+#zapovedny-comic .comic-step legend,
+#zapovedny-comic .comic-step--lead h3 {
+  font-size: clamp(24px, 2.8vw, 34px); margin-bottom: 8px;
+}
+#zapovedny-comic .comic-option {
+  min-height: 60px; font-size: clamp(16px, 1.4vw, 19px);
+}
+#zapovedny-comic .comic-cta--quiz {
+  font-size: clamp(18px, 1.8vw, 24px);
+}
+#zapovedny-comic .comic-note {
+  text-align: center; font-weight: 600;
+}
+
+/* ============= RESPONSIVE: TABLET 640+ ============= */
+@media (min-width: 640px) {
+  #zapovedny-comic .comic-compare { grid-template-columns: 1fr 1fr; }
+  #zapovedny-comic .comic-compare .compare-card:last-child { grid-column: 1 / -1; }
+}
+
+/* ============= RESPONSIVE: 768+ ============= */
+@media (min-width: 768px) {
+  #zapovedny-comic .comic-spread--cover {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+  #zapovedny-comic .comic-spread--fear {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+  #zapovedny-comic .comic-spread--calc {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+  #zapovedny-comic .comic-spread--checklist {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+  #zapovedny-comic .comic-spread--resolution {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+  #zapovedny-comic .comic-cta { width: fit-content; }
+  #zapovedny-comic .comic-lead__full { display: block; }
+  #zapovedny-comic .comic-lead__short { display: none; }
+  #zapovedny-comic .comic-compare { grid-template-columns: 1fr 1fr 1fr; }
+  #zapovedny-comic .comic-compare .compare-card:last-child { grid-column: auto; }
+}
+
+/* ============= RESPONSIVE: 1024+ ============= */
+@media (min-width: 1024px) {
+  #zapovedny-comic .comic-page { padding: 60px 0 100px; }
+  #zapovedny-comic .comic-cover { padding: 52px 0 0; }
+  #zapovedny-comic .comic-spread {
+    width: min(1100px, calc(100% - 48px));
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+  #zapovedny-comic .comic-spread--cover { grid-template-columns: 1.1fr 0.9fr; }
+  #zapovedny-comic .comic-spread--fear { grid-template-columns: 0.9fr 1.1fr; }
+  #zapovedny-comic .comic-spread--calc { grid-template-columns: 1.1fr 0.9fr; }
+  #zapovedny-comic .comic-spread--checklist { grid-template-columns: 1.2fr 0.8fr; }
+  #zapovedny-comic .comic-spread--resolution { grid-template-columns: 1.1fr 0.9fr; }
+  #zapovedny-comic .comic-title { font-size: clamp(48px, 5.5vw, 76px); }
+  #zapovedny-comic .comic-cover .comic-title { font-size: clamp(48px, 5.5vw, 72px); }
+}
+
+/* ============= RESPONSIVE: 1280+ ============= */
+@media (min-width: 1280px) {
+  #zapovedny-comic .comic-spread { width: min(1200px, calc(100% - 56px)); gap: clamp(48px, 6vw, 80px); }
+  #zapovedny-comic .comic-panel { box-shadow: 16px 16px 0 rgba(36, 74, 53, 0.18); }
+  #zapovedny-comic .comic-title { font-size: clamp(56px, 5vw, 80px); }
+  #zapovedny-comic .comic-cover .comic-title { font-size: clamp(56px, 5vw, 72px); }
+}
+
+/* ============= RESPONSIVE: 1536+ ============= */
+@media (min-width: 1536px) {
+  #zapovedny-comic .comic-spread { width: min(1320px, calc(100% - 64px)); }
+  #zapovedny-comic .comic-title { font-size: clamp(60px, 4.5vw, 88px); }
+  #zapovedny-comic .comic-cover .comic-title { font-size: clamp(60px, 4.5vw, 78px); }
+}
+
+/* ============= MOBILE <=430 ============= */
+@media (max-width: 430px) {
+  #zapovedny-comic .comic-page { min-height: auto; padding: 32px 0 48px; }
+  #zapovedny-comic .comic-cover { min-height: auto; height: auto; padding: 44px 0 16px; }
+  #zapovedny-comic .comic-cover__kicker { font-size: 10px; padding: 6px 12px; }
+  #zapovedny-comic .comic-rail { top: 8px; padding: 4px; gap: 2px; }
+  #zapovedny-comic .comic-rail a { padding: 4px 10px; font-size: 11px; }
+  #zapovedny-comic .comic-title { font-size: 32px; }
+  #zapovedny-comic .comic-cover .comic-title { font-size: 34px; }
+  #zapovedny-comic .comic-lead { font-size: 15px; }
+  #zapovedny-comic .comic-panel,
+  #zapovedny-comic .comic-panel--hero,
+  #zapovedny-comic .comic-panel--wing,
+  #zapovedny-comic .comic-panel--house,
+  #zapovedny-comic .comic-panel--final { aspect-ratio: 16 / 10; }
+  #zapovedny-comic .sticker--xl { min-height: 46px; padding: 10px 20px; font-size: 16px; }
+  #zapovedny-comic .speech { max-width: 100%; padding: 8px 30px 8px 8px; font-size: 14px; }
+  #zapovedny-comic .speech > img { width: 36px; height: 36px; flex-basis: 36px; }
+  #zapovedny-comic .check-item { padding: 10px 14px; font-size: 14px; }
+  #zapovedny-comic .comic-cta { min-height: 50px; font-size: 15px; padding: 12px 24px; }
+  #zapovedny-comic .comic-option { min-height: 48px; padding: 12px 14px; font-size: 14px; }
+  #zapovedny-comic .comic-quiz__card { padding: 20px; }
+  #zapovedny-comic .comic-step legend,
+  #zapovedny-comic .comic-step--lead h3 { font-size: 20px; }
+  #zapovedny-comic .comic-quiz__header .comic-title { font-size: 26px; }
+  #zapovedny-comic .comic-kicker { font-size: 12px; padding: 4px 12px; }
+  /* Hide panel on mobile for checklist scene */
+  #zapovedny-comic #scene-4 .comic-panel { display: none; }
+  /* Max 1-2 speech bubbles on mobile */
+  #zapovedny-comic .comic-bubbles .speech:nth-child(n+3) { display: none; }
+  /* Hide marginalia on mobile */
+  #zapovedny-comic .comic-margins { display: none; }
+  #zapovedny-comic .comic-page::before { display: none; }
+  #zapovedny-comic .comic-opportunity__sticker-grid .sticker--hide-mobile { display: none; }
+}
+
+/* ============= REDUCED MOTION ============= */
+@media (prefers-reduced-motion: reduce) {
+  #zapovedny-comic *, #zapovedny-comic *::before, #zapovedny-comic *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
