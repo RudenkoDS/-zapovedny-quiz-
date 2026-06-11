@@ -432,6 +432,17 @@
   margin: 10px 0 0; color: rgba(30, 30, 30, 0.5); font-size: 13px;
 }
 
+#zapovedny-comic .comic-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+#zapovedny-comic .comic-consent input { flex: 0 0 auto; margin-top: 3px; }
+#zapovedny-comic .comic-consent a { color: inherit; text-decoration: underline; }
+
 /* Thanks */
 #zapovedny-comic .comic-thanks__panel {
   padding: 10px 0; display: grid; gap: 20px;

@@ -28,22 +28,26 @@
   }
 
   function getYaCounter() {
-    if (typeof ym !== "undefined") return ym;
+    if (typeof window.ym === "function") return window.ym;
     return null;
   }
 
   function reachGoal(id) {
     const ya = getYaCounter();
-    if (ya) try { ya("reachGoal", id); } catch(e) {}
+    const counterId = window.mainMetrikaId || 103239874;
+    if (ya) try { ya(counterId, "reachGoal", id); } catch(e) {}
   }
 
-  function submitLead(payload) {
-    fetch("/api/lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    }).catch(() => {});
-    reachGoal("zapovedny_quiz_submit");
+  function setFormValue(name, value) {
+    const input = form.elements.namedItem(name);
+    if (input) input.value = value || "";
+  }
+
+  function prepareTildaSubmission(payload) {
+    Object.entries(payload.answers).forEach(([key, value]) => setFormValue(`quiz_${key}`, value));
+    Object.entries(payload.utm).forEach(([key, value]) => setFormValue(key, value));
+    setFormValue("source", payload.source);
+    setFormValue("submitted_at", payload.timestamp);
   }
 
   function setError(message) {
@@ -103,8 +107,8 @@
     return {
       source: state.source,
       answers: { ...state.answers },
-      name: String(data.get("name") || "").trim(),
-      phone: String(data.get("phone") || "").trim(),
+      name: String(data.get("Name") || "").trim(),
+      phone: String(data.get("Phone") || "").trim(),
       utm: getUTMParams(),
       timestamp: new Date().toISOString()
     };
@@ -132,6 +136,7 @@
     if (!saveCurrentAnswer()) return;
     if (state.currentStep === 1) reachGoal("zapovedny_quiz_start");
     state.currentStep += 1;
+    reachGoal(state.currentStep === 5 ? "zapovedny_quiz_contacts" : `zapovedny_quiz_step_${state.currentStep}`);
     updateStep();
   });
 
@@ -149,24 +154,48 @@
   });
 
   form.addEventListener("submit", (event) => {
-    event.preventDefault();
     const payload = collectLeadPayload();
 
     if (!isValidName(payload.name)) {
+      event.preventDefault();
       setError("Укажите имя: хотя бы 2 символа.");
       return;
     }
 
     if (!isValidPhone(payload.phone)) {
+      event.preventDefault();
       setError("Укажите телефон в удобном формате, например +7 900 000-00-00.");
       return;
     }
 
-    submitLead(payload);
+    if (!form.elements.consent.checked) {
+      event.preventDefault();
+      setError("Подтвердите согласие на обработку персональных данных.");
+      return;
+    }
+
+    prepareTildaSubmission(payload);
+    submitButton.disabled = true;
+    submitButton.textContent = "Отправляем...";
+    setError("");
+  });
+
+  const successObserver = new MutationObserver(() => {
+    if (!form.classList.contains("js-send-form-success")) return;
+    reachGoal("zapovedny_quiz_submit");
     form.hidden = true;
     root.querySelector(".comic-quiz__progress").hidden = true;
     thanks.hidden = false;
+    successObserver.disconnect();
   });
+  successObserver.observe(form, { attributes: true, attributeFilter: ["class"] });
+
+  if (!window.tildaForm) {
+    const script = document.createElement("script");
+    script.src = "https://static.tildacdn.com/js/tilda-forms-1.0.min.js";
+    script.async = true;
+    document.head.appendChild(script);
+  }
 
   updateStep();
 
