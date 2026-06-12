@@ -1,0 +1,531 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Заповедный / dom-8mln — natural premium ===== */
+#zp-land{
+  --cream:#FBF9F4; --milk:#F4F0E6; --sand:#E9E2D0; --olive:#7A8B6F;
+  --deep:#2E4A38; --deep2:#223A2B; --graphite:#2C2E2B; --mut:#6E7269;
+  --r:18px; --shadow:0 10px 40px rgba(46,74,56,.10);
+  font-family:'Manrope',-apple-system,sans-serif; color:var(--graphite);
+  background:var(--cream); line-height:1.6; font-size:17px;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+#zp-land *{margin:0;padding:0;box-sizing:border-box}
+#zp-land img{display:block;max-width:100%}
+#zp-land .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+#zp-land h1,#zp-land h2,#zp-land h3{font-weight:800;color:var(--deep2);line-height:1.12;letter-spacing:-0.015em}
+#zp-land h2{font-size:clamp(26px,4.6vw,42px);margin-bottom:14px}
+#zp-land .sub{color:var(--mut);font-size:clamp(15px,2.4vw,19px);max-width:640px}
+#zp-land section{padding:clamp(48px,9vw,104px) 0}
+#zp-land .rev{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+#zp-land .rev.on{opacity:1;transform:none}
+
+/* buttons */
+#zp-land .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:inherit;font-weight:700;font-size:17px;border:none;cursor:pointer;text-decoration:none;
+  border-radius:14px;padding:18px 34px;transition:transform .25s ease,box-shadow .25s ease}
+#zp-land .btn-main{background:var(--deep);color:#fff;box-shadow:0 12px 30px rgba(46,74,56,.28)}
+#zp-land .btn-main:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(46,74,56,.34)}
+#zp-land .btn-ghost{background:#fff;color:var(--deep);border:1.5px solid var(--sand)}
+#zp-land .btn-ghost:hover{border-color:var(--olive)}
+
+/* ===== hero ===== */
+#zp-land .hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;padding:0}
+#zp-land .hero-bg{position:absolute;inset:0;background:url('https://rudenkods.github.io/-zapovedny-quiz-/assets/landing/hero-street-duplex.jpg') center 65%/cover no-repeat}
+#zp-land .hero-bg::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(34,46,38,.18) 0%,rgba(34,46,38,.06) 35%,rgba(24,33,26,.78) 100%)}
+#zp-land .hero-in{position:relative;width:100%;padding:120px 0 46px}
+#zp-land .hero-card{max-width:680px;color:#fff}
+#zp-land .hero-kicker{display:inline-block;background:rgba(251,249,244,.92);color:var(--deep2);
+  font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:9px 18px;margin-bottom:22px}
+#zp-land h1{color:#fff;font-size:clamp(32px,6.4vw,58px);margin-bottom:14px}
+#zp-land .hero-sub{font-size:clamp(17px,2.8vw,22px);font-weight:600;opacity:.96;margin-bottom:8px}
+#zp-land .hero-note{font-size:15px;opacity:.82;max-width:520px;margin-bottom:26px}
+#zp-land .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+#zp-land .badges{display:flex;gap:9px;flex-wrap:wrap}
+#zp-land .bdg{background:rgba(251,249,244,.14);backdrop-filter:blur(8px);border:1px solid rgba(251,249,244,.35);
+  color:#fff;font-size:13.5px;font-weight:600;border-radius:999px;padding:8px 15px}
+#zp-land .hero-legal{font-size:12px;opacity:.6;margin-top:18px;max-width:560px}
+
+/* ===== benefit cards ===== */
+#zp-land .cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:38px}
+#zp-land .bcard{background:#fff;border-radius:var(--r);padding:28px 24px;box-shadow:var(--shadow);
+  transition:transform .3s ease}
+#zp-land .bcard:hover{transform:translateY(-4px)}
+#zp-land .bcard .ico{width:46px;height:46px;border-radius:13px;background:var(--milk);display:flex;
+  align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+#zp-land .bcard h3{font-size:18px;margin-bottom:8px}
+#zp-land .bcard p{font-size:14.5px;color:var(--mut)}
+
+/* ===== gallery ===== */
+#zp-land .trust{background:var(--milk)}
+#zp-land .gal{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:220px;gap:14px;margin-top:36px}
+#zp-land .gal .ph{border-radius:var(--r);overflow:hidden;position:relative}
+#zp-land .gal .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+#zp-land .gal .ph:hover img{transform:scale(1.04)}
+#zp-land .gal .ph:nth-child(1){grid-row:span 2}
+#zp-land .gal .ph:nth-child(4){grid-column:span 2}
+#zp-land .tour-link{display:inline-flex;align-items:center;gap:8px;margin-top:22px;color:var(--deep);
+  font-weight:700;text-decoration:none;border-bottom:2px solid var(--olive)}
+
+/* ===== env ===== */
+#zp-land .env-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+#zp-land .env{background:#fff;border:1px solid var(--sand);border-radius:14px;padding:18px 18px;
+  font-weight:600;font-size:15px;display:flex;align-items:center;gap:11px}
+#zp-land .env span{font-size:20px}
+
+/* ===== quiz ===== */
+#zp-land .quiz-sect{background:linear-gradient(180deg,var(--cream) 0%,var(--milk) 100%)}
+#zp-land .quiz-box{max-width:680px;margin:36px auto 0;background:#fff;border-radius:24px;
+  box-shadow:0 24px 70px rgba(46,74,56,.14);padding:clamp(24px,5vw,44px);position:relative}
+#zp-land .qprog{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+#zp-land .qprog .track{flex:1;height:6px;border-radius:4px;background:var(--milk);overflow:hidden}
+#zp-land .qprog .fill{height:100%;width:0;background:linear-gradient(90deg,var(--olive),var(--deep));
+  border-radius:4px;transition:width .45s ease}
+#zp-land .qprog .lbl{font-size:13.5px;font-weight:700;color:var(--mut);white-space:nowrap}
+#zp-land .qstep{display:none;animation:zpfade .45s ease}
+#zp-land .qstep.act{display:block}
+@keyframes zpfade{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+#zp-land .qstep h3{font-size:clamp(20px,3.6vw,26px);margin-bottom:20px}
+#zp-land .opts{display:grid;gap:11px}
+#zp-land .opt{display:flex;align-items:center;gap:13px;background:var(--cream);border:1.5px solid var(--sand);
+  border-radius:14px;padding:17px 18px;cursor:pointer;font-weight:600;font-size:16px;
+  transition:border-color .2s,background .2s,transform .2s}
+#zp-land .opt:hover{border-color:var(--olive);transform:translateX(3px)}
+#zp-land .opt input{accent-color:var(--deep);width:19px;height:19px;flex:none}
+#zp-land .opt.sel{border-color:var(--deep);background:#fff;box-shadow:0 6px 18px rgba(46,74,56,.10)}
+#zp-land .qnav{display:flex;gap:12px;margin-top:24px}
+#zp-land .qback{background:none;border:none;color:var(--mut);font-weight:700;font-size:15px;cursor:pointer;
+  font-family:inherit;padding:12px 6px}
+#zp-land .qnext{flex:1}
+#zp-land .qnext:disabled{opacity:.45;cursor:not-allowed;transform:none}
+/* form */
+#zp-land .frow{display:grid;gap:13px;margin-bottom:16px}
+#zp-land .fld{display:block}
+#zp-land .fld span{display:block;font-size:13.5px;font-weight:700;color:var(--mut);margin-bottom:7px}
+#zp-land .fld input,#zp-land .fld textarea{width:100%;font-family:inherit;font-size:17px;border:1.5px solid var(--sand);
+  border-radius:13px;padding:15px 16px;background:var(--cream);outline:none;transition:border-color .2s}
+#zp-land .fld input:focus,#zp-land .fld textarea:focus{border-color:var(--olive);background:#fff}
+#zp-land .chips{display:flex;gap:9px;flex-wrap:wrap}
+#zp-land .chip{border:1.5px solid var(--sand);background:var(--cream);border-radius:999px;padding:11px 18px;
+  font-weight:700;font-size:14.5px;cursor:pointer;display:flex;align-items:center;gap:7px}
+#zp-land .chip input{display:none}
+#zp-land .chip.sel{background:var(--deep);color:#fff;border-color:var(--deep)}
+#zp-land .consent{font-size:13px;color:var(--mut);margin-top:13px;text-align:center}
+#zp-land .consent a{color:var(--deep)}
+#zp-land .qerr{color:#A4543C;font-size:14px;font-weight:600;min-height:20px;margin-top:10px;text-align:center}
+/* success */
+#zp-land .succ{display:none;text-align:center;padding:26px 6px;animation:zpfade .5s ease}
+#zp-land .succ.on{display:block}
+#zp-land .succ .mark{width:74px;height:74px;border-radius:50%;background:var(--milk);margin:0 auto 20px;
+  display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--deep);
+  animation:zppop .6s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes zppop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* ===== after steps ===== */
+#zp-land .steps5{counter-reset:zs;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:36px}
+#zp-land .s5{background:#fff;border-radius:var(--r);padding:24px 18px;box-shadow:var(--shadow);position:relative}
+#zp-land .s5::before{counter-increment:zs;content:counter(zs);position:absolute;top:-13px;left:18px;
+  width:28px;height:28px;border-radius:50%;background:var(--olive);color:#fff;font-weight:800;font-size:14px;
+  display:flex;align-items:center;justify-content:center}
+#zp-land .s5 p{font-size:14.5px;font-weight:600;margin-top:8px}
+
+/* ===== limit / final ===== */
+#zp-land .limit{background:var(--milk)}
+#zp-land .limit-card{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:clamp(28px,5vw,48px);
+  display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap}
+#zp-land .final{background:var(--deep2);color:#fff;text-align:center}
+#zp-land .final h2{color:#fff}
+#zp-land .final .sub{color:rgba(255,255,255,.75);margin:0 auto 28px}
+/* ===== footer ===== */
+#zp-land footer{background:var(--graphite);color:#9b9f97;font-size:13px;padding:38px 0 46px}
+#zp-land footer a{color:#cfd3c9}
+#zp-land .legal{margin-top:14px;font-size:12px;line-height:1.7;opacity:.75}
+#zp-land .contacts-line{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px;font-size:15px}
+
+@media(max-width:920px){
+  #zp-land .cards4{grid-template-columns:1fr 1fr}
+  #zp-land .env-grid{grid-template-columns:1fr 1fr}
+  #zp-land .steps5{grid-template-columns:1fr 1fr;row-gap:24px}
+  #zp-land .gal{grid-template-columns:1fr 1fr;grid-auto-rows:190px}
+  #zp-land .gal .ph:nth-child(4){grid-column:span 1}
+}
+@media(max-width:560px){
+  #zp-land{font-size:16px}
+  #zp-land .hero{min-height:88svh}
+  #zp-land .hero-in{padding:96px 0 34px}
+  #zp-land .hero-cta .btn{width:100%}
+  #zp-land .cards4{grid-template-columns:1fr}
+  #zp-land .env-grid{grid-template-columns:1fr}
+  #zp-land .steps5{grid-template-columns:1fr}
+  #zp-land .gal{grid-template-columns:1fr;grid-auto-rows:230px}
+  #zp-land .gal .ph:nth-child(1){grid-row:span 1}
+  #zp-land .btn{padding:17px 26px;font-size:16px}
+  #zp-land .limit-card{text-align:center;justify-content:center}
+}
+</style>
+
+<div id="zp-land">
+
+  <!-- 1. HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap hero-in">
+      <div class="hero-card">
+        <span class="hero-kicker">Заповедный · Синий Утёс · Томск</span>
+        <h1>Готовый кирпичный дом для семьи за 8 000 000 ₽</h1>
+        <p class="hero-sub">2 готовых дома в «Заповедном» по специальной цене до 1 июля</p>
+        <p class="hero-note">Можно посмотреть уже сегодня. Подходят для семейной ипотеки при соответствии требованиям программы.</p>
+        <div class="hero-cta">
+          <a href="#zp-quiz" class="btn btn-main" data-cta>Подобрать дом</a>
+          <a href="#zp-quiz" class="btn btn-ghost" data-cta style="background:rgba(251,249,244,.92)">Записаться на просмотр</a>
+        </div>
+        <div class="badges">
+          <span class="bdg">Готовые дома</span><span class="bdg">170 м²</span>
+          <span class="bdg">От 8 млн ₽</span><span class="bdg">Семейная ипотека*</span>
+          <span class="bdg">Просмотр сегодня</span>
+        </div>
+        <p class="hero-legal">*При соответствии требованиям программы. Условия семейной ипотеки могут изменяться государственными органами.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ВЫГОДЫ -->
+  <section>
+    <div class="wrap">
+      <h2 class="rev">Почему это предложение стоит посмотреть сейчас</h2>
+      <div class="cards4">
+        <div class="bcard rev"><div class="ico">🏠</div><h3>Дом уже построен</h3><p>Не нужно ждать окончания строительства. Можно приехать и увидеть всё лично.</p></div>
+        <div class="bcard rev"><div class="ico">💰</div><h3>Цена по акции</h3><p>2 готовых дома доступны по специальной цене — 8 000 000 ₽.</p></div>
+        <div class="bcard rev"><div class="ico">👨‍👩‍👧‍👦</div><h3>Формат для семьи</h3><p>Большая площадь, участок, спокойная среда и жизнь рядом с природой.</p></div>
+        <div class="bcard rev"><div class="ico">🏦</div><h3>Семейная ипотека</h3><p>Если семья соответствует условиям программы, дом может подойти под семейную ипотеку.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ДОВЕРИЕ -->
+  <section class="trust">
+    <div class="wrap">
+      <h2 class="rev">Заповедный — не картинка на будущее, а место, куда можно приехать</h2>
+      <p class="sub rev">В акции участвуют готовые дома, которые можно посмотреть лично. Посёлок уже развивается: построенные дома, благоустроенные улицы, единый архитектурный стиль и природное окружение.</p>
+      <div class="gal">
+        <div class="ph rev"><img src="https://rudenkods.github.io/-zapovedny-quiz-/assets/landing/gallery-duplex-close.jpg" alt="Готовый дуплекс в Заповедном" loading="lazy"></div>
+        <div class="ph rev"><img src="https://rudenkods.github.io/-zapovedny-quiz-/assets/landing/gallery-drone-street.jpg" alt="Улица посёлка" loading="lazy"></div>
+        <div class="ph rev"><img src="https://rudenkods.github.io/-zapovedny-quiz-/assets/landing/gallery-landscape.jpg" alt="Благоустройство и ландшафт" loading="lazy"></div>
+        <div class="ph rev"><img src="https://rudenkods.github.io/-zapovedny-quiz-/assets/landing/gallery-aerial-forest.jpg" alt="Посёлок и лес с высоты" loading="lazy"></div>
+        <div class="ph rev"><img src="https://rudenkods.github.io/-zapovedny-quiz-/assets/landing/gallery-golden-hour.jpg" alt="Дом на закате" loading="lazy"></div>
+      </div>
+      <a class="tour-link rev" href="https://3dtomsk.ru/vtour/zapovedny/02/" target="_blank" rel="noopener" data-cta>Посмотреть 3D-тур по посёлку →</a>
+    </div>
+  </section>
+
+  <!-- 4. ОКРУЖЕНИЕ -->
+  <section>
+    <div class="wrap">
+      <h2 class="rev">Загородная жизнь без ощущения оторванности от города</h2>
+      <div class="env-grid">
+        <div class="env rev"><span>⛰</span>Рядом Синий Утёс</div>
+        <div class="env rev"><span>🏞</span>Река и пляж</div>
+        <div class="env rev"><span>🌲</span>Лесной массив</div>
+        <div class="env rev"><span>🍃</span>Чистый воздух</div>
+        <div class="env rev"><span>🧱</span>Кирпичные дома</div>
+        <div class="env rev"><span>🔥</span>Газ и электричество</div>
+        <div class="env rev"><span>💧</span>Водозабор и очистка воды</div>
+        <div class="env rev"><span>🏘</span>Единый архитектурный стиль</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. КВИЗ -->
+  <section class="quiz-sect" id="zp-quiz">
+    <div class="wrap">
+      <h2 class="rev" style="text-align:center">Подберите подходящий вариант за 1 минуту</h2>
+      <p class="sub rev" style="text-align:center;margin:0 auto">Ответьте на несколько вопросов — подскажем, подходит ли вам предложение, и поможем записаться на просмотр.</p>
+
+      <div class="quiz-box">
+        <div class="qprog"><div class="track"><div class="fill" data-qfill></div></div><span class="lbl" data-qlbl>Шаг 1 из 5</span></div>
+
+        <form class="t-form js-form-proccess" data-zp-form method="POST" action="#" data-formactiontype="2" novalidate>
+          <input type="hidden" name="formservices[]" value="dc662550b8ac3c5e1ee3e11dcb661cfb" class="js-formaction-services">
+          <input type="hidden" name="formservices[]" value="5684fa1abd7a18a3e5fd0059730c3d1c" class="js-formaction-services">
+          <input type="hidden" name="formservices[]" value="49f8d73a73587bfcc370bb0cc4ff2bb2" class="js-formaction-services">
+          <input type="hidden" name="formservices[]" value="4159719010aff623ddb9d28575b5e341" class="js-formaction-services">
+          <input type="hidden" name="tildaspec-formname" value="zapovedny_dom8mln">
+          <input type="hidden" name="project" value="zapovedny">
+          <input type="hidden" name="landing" value="kviz_classic">
+          <input type="hidden" name="quiz_answers">
+          <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium">
+          <input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content">
+          <input type="hidden" name="utm_term"><input type="hidden" name="yclid">
+          <input type="hidden" name="metrika_client_id"><input type="hidden" name="page_url">
+          <input type="hidden" name="created_at">
+
+          <fieldset class="qstep act" data-q="1" style="border:none">
+            <h3>Когда хотите переехать в дом?</h3>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q_when" value="В ближайшие месяцы"><span>В ближайшие месяцы</span></label>
+              <label class="opt"><input type="radio" name="q_when" value="В течение этого года"><span>В течение этого года</span></label>
+              <label class="opt"><input type="radio" name="q_when" value="Пока присматриваюсь"><span>Пока присматриваюсь</span></label>
+              <label class="opt"><input type="radio" name="q_when" value="Хочу понять условия"><span>Хочу понять условия</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="qstep" data-q="2" style="border:none">
+            <h3>Что для вас важнее всего?</h3>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q_priority" value="Готовый дом без ожидания стройки"><span>Готовый дом без ожидания стройки</span></label>
+              <label class="opt"><input type="radio" name="q_priority" value="Цена до 8 млн ₽"><span>Цена до 8 млн ₽</span></label>
+              <label class="opt"><input type="radio" name="q_priority" value="Возможность семейной ипотеки"><span>Возможность семейной ипотеки</span></label>
+              <label class="opt"><input type="radio" name="q_priority" value="Большая площадь для семьи"><span>Большая площадь для семьи</span></label>
+              <label class="opt"><input type="radio" name="q_priority" value="Тихое место рядом с городом"><span>Тихое место рядом с городом</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="qstep" data-q="3" style="border:none">
+            <h3>Какой формат вам ближе?</h3>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q_format" value="Приехать на просмотр"><span>Приехать на просмотр</span></label>
+              <label class="opt"><input type="radio" name="q_format" value="Сначала получить подробности"><span>Сначала получить подробности</span></label>
+              <label class="opt"><input type="radio" name="q_format" value="Посчитать условия покупки"><span>Посчитать условия покупки</span></label>
+              <label class="opt"><input type="radio" name="q_format" value="Обсудить ипотеку"><span>Обсудить ипотеку</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="qstep" data-q="4" style="border:none">
+            <h3>Планируете использовать ипотеку?</h3>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q_mortgage" value="Да, семейную ипотеку"><span>Да, семейную ипотеку</span></label>
+              <label class="opt"><input type="radio" name="q_mortgage" value="Да, другую ипотеку"><span>Да, другую ипотеку</span></label>
+              <label class="opt"><input type="radio" name="q_mortgage" value="Пока не знаю"><span>Пока не знаю</span></label>
+              <label class="opt"><input type="radio" name="q_mortgage" value="Возможно купим без ипотеки"><span>Возможно купим без ипотеки</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="qstep" data-q="5" style="border:none">
+            <h3>Когда удобно связаться?</h3>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q_contact_time" value="Сегодня"><span>Сегодня</span></label>
+              <label class="opt"><input type="radio" name="q_contact_time" value="Завтра"><span>Завтра</span></label>
+              <label class="opt"><input type="radio" name="q_contact_time" value="В ближайшие дни"><span>В ближайшие дни</span></label>
+              <label class="opt"><input type="radio" name="q_contact_time" value="Сначала напишите в мессенджер"><span>Сначала напишите в мессенджер</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="qstep" data-q="6" style="border:none">
+            <h3>Оставьте контакты — подскажем, какой дом можно посмотреть</h3>
+            <div class="frow">
+              <label class="fld"><span>Имя</span><input class="t-input js-tilda-rule" type="text" name="Name" autocomplete="name" data-tilda-req="1" data-tilda-rule="name" placeholder="Как к вам обращаться"></label>
+              <label class="fld"><span>Телефон</span><input class="t-input js-tilda-rule" type="tel" name="Phone" inputmode="tel" autocomplete="tel" data-tilda-req="1" data-tilda-rule="phone" placeholder="+7 ___ ___-__-__"></label>
+              <div class="fld"><span>Удобный способ связи</span>
+                <div class="chips">
+                  <label class="chip sel"><input type="radio" name="contact_method" value="Звонок" checked>📞 Звонок</label>
+                  <label class="chip"><input type="radio" name="contact_method" value="WhatsApp">💬 WhatsApp</label>
+                  <label class="chip"><input type="radio" name="contact_method" value="Telegram">✈️ Telegram</label>
+                </div>
+              </div>
+              <label class="fld"><span>Комментарий (необязательно)</span><textarea name="Comment" rows="2" placeholder="Например: интересует просмотр в выходные"></textarea></label>
+            </div>
+          </fieldset>
+
+          <p class="qerr" data-qerr aria-live="polite"></p>
+          <div class="qnav">
+            <button type="button" class="qback" data-qback hidden>← Назад</button>
+            <button type="button" class="btn btn-main qnext" data-qnext disabled>Дальше</button>
+            <button type="submit" class="btn btn-main qnext" data-qsubmit hidden>Записаться на просмотр</button>
+          </div>
+          <p class="consent" data-qconsent hidden>Нажимая кнопку, вы соглашаетесь на <a href="https://поселок-заповедный.рф/page44988307.html" target="_blank" rel="noopener">обработку персональных данных</a>.</p>
+          <div class="js-successbox t-form__successbox" hidden>Спасибо! Заявка отправлена.</div>
+          <div class="js-errorbox-all" hidden><div class="js-rule-error-all"></div><div class="js-rule-error-req"></div><div class="js-rule-error-phone"></div><div class="js-rule-error-name"></div></div>
+        </form>
+
+        <div class="succ" data-zp-succ>
+          <div class="mark">✓</div>
+          <h3 style="margin-bottom:10px">Спасибо! Заявка отправлена.</h3>
+          <p class="sub" style="margin:0 auto">Мы свяжемся с вами и подскажем, когда можно посмотреть готовые дома в «Заповедном».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ЧТО ПОСЛЕ ЗАЯВКИ -->
+  <section>
+    <div class="wrap">
+      <h2 class="rev">Что произойдёт после заявки</h2>
+      <div class="steps5">
+        <div class="s5 rev"><p>Уточним ваши пожелания</p></div>
+        <div class="s5 rev"><p>Расскажем по двум готовым домам</p></div>
+        <div class="s5 rev"><p>Подскажем по семейной ипотеке</p></div>
+        <div class="s5 rev"><p>Запишем на просмотр</p></div>
+        <div class="s5 rev"><p>Покажем дом и посёлок лично</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ОГРАНИЧЕНИЕ -->
+  <section class="limit">
+    <div class="wrap">
+      <div class="limit-card rev">
+        <div style="max-width:560px">
+          <h2 style="margin-bottom:8px">Предложение ограничено</h2>
+          <p class="sub">По специальной цене доступны 2 готовых дома. Условия действуют до 1 июля или до момента продажи домов.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="#zp-quiz" class="btn btn-main" data-cta>Подобрать дом</a>
+          <a href="#zp-quiz" class="btn btn-ghost" data-cta>Записаться на просмотр</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. ФИНАЛ -->
+  <section class="final">
+    <div class="wrap">
+      <h2 class="rev">Семейная ипотека может измениться.<br>Ваш дом — нет.</h2>
+      <p class="sub rev">Мы не можем влиять на будущие правила. Но можем помочь семье купить готовый дом сегодня.</p>
+      <a href="#zp-quiz" class="btn btn-main rev" data-cta style="background:#fff;color:var(--deep2)">Записаться на просмотр</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="contacts-line">
+        <a href="tel:+73822200677" data-phone>8 (3822) 200-677</a>
+        <a href="https://wa.me/79527545487" target="_blank" rel="noopener" data-msgr>WhatsApp</a>
+        <a href="https://t.me/andreyefremov_tomsk" target="_blank" rel="noopener" data-msgr>Telegram</a>
+        <a href="https://vk.com/zapovedniy_tomsk" target="_blank" rel="noopener">ВКонтакте</a>
+      </div>
+      <div>634009, г. Томск, пр. Ленина 147 · ООО «ТИСК-СТРОЙ СЗ» · ИНН 7017137905 · ОГРН 701701001</div>
+      <div><a href="https://поселок-заповедный.рф/page44988307.html" target="_blank" rel="noopener">Согласие на обработку персональных данных</a> · <a href="https://поселок-заповедный.рф/page44988279.html" target="_blank" rel="noopener">Политика конфиденциальности</a></div>
+      <p class="legal">*При соответствии требованиям программы семейной ипотеки. Условия программы могут быть изменены государственными органами. Предложение ограничено количеством готовых домов и сроком акции. Информация на сайте не является публичной офертой.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('zp-land');
+  if (!root) return;
+  var MID = window.mainMetrikaId || 103239874;
+  function goal(g){ if (typeof ym === 'function') try { ym(MID, 'reachGoal', g); } catch(e){} }
+
+  /* ---- UTM / yclid persist ---- */
+  var P_KEY = 'zp_utm';
+  try {
+    var sp = new URLSearchParams(location.search), got = {}, keys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','yclid'];
+    keys.forEach(function(k){ if (sp.get(k)) got[k] = sp.get(k); });
+    if (Object.keys(got).length) localStorage.setItem(P_KEY, JSON.stringify(got));
+    var saved = JSON.parse(localStorage.getItem(P_KEY) || '{}');
+    var form = root.querySelector('[data-zp-form]');
+    keys.forEach(function(k){ var i = form.elements.namedItem(k); if (i && saved[k]) i.value = saved[k]; });
+    form.elements.namedItem('page_url').value = location.href;
+  } catch(e){}
+
+  /* metrika client id */
+  function grabCID(){ if (typeof ym === 'function') try { ym(MID, 'getClientID', function(cid){
+    var i = root.querySelector('[name="metrika_client_id"]'); if (i) i.value = cid; }); } catch(e){} }
+  grabCID(); setTimeout(grabCID, 3000);
+
+  /* ---- reveal on scroll ---- */
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }); }, {threshold:.14});
+  root.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
+
+  /* ---- CTA / contact goals + smooth scroll ---- */
+  root.querySelectorAll('[data-cta]').forEach(function(a){ a.addEventListener('click', function(e){
+    goal('zapovedny_cta_click');
+    var href = a.getAttribute('href') || '';
+    if (href.charAt(0) === '#') { var t = root.querySelector(href);
+      if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); } }
+  }); });
+  root.querySelectorAll('[data-phone]').forEach(function(a){ a.addEventListener('click', function(){ goal('zapovedny_phone_click'); }); });
+  root.querySelectorAll('[data-msgr]').forEach(function(a){ a.addEventListener('click', function(){ goal('zapovedny_messenger_click'); }); });
+
+  /* ---- quiz engine ---- */
+  var form = root.querySelector('[data-zp-form]');
+  var steps = [].slice.call(root.querySelectorAll('.qstep'));
+  var TOTAL_Q = 5, cur = 1, S_KEY = 'zp_quiz_v1';
+  var fill = root.querySelector('[data-qfill]'), lbl = root.querySelector('[data-qlbl]');
+  var bBack = root.querySelector('[data-qback]'), bNext = root.querySelector('[data-qnext]'),
+      bSub = root.querySelector('[data-qsubmit]'), errEl = root.querySelector('[data-qerr]'),
+      consent = root.querySelector('[data-qconsent]');
+  var goals = {1:'zapovedny_quiz_start',2:'zapovedny_quiz_step_2',3:'zapovedny_quiz_step_3',4:'zapovedny_quiz_step_4',5:'zapovedny_quiz_contacts_view'};
+  var fired = {};
+
+  function save(){ try { var d = {cur: cur, vals: {}};
+    ['q_when','q_priority','q_format','q_mortgage','q_contact_time'].forEach(function(n){
+      var c = form.querySelector('[name="'+n+'"]:checked'); if (c) d.vals[n] = c.value; });
+    localStorage.setItem(S_KEY, JSON.stringify(d)); } catch(e){} }
+  function restore(){ try { var d = JSON.parse(localStorage.getItem(S_KEY) || 'null'); if (!d) return;
+    Object.keys(d.vals||{}).forEach(function(n){ var i = form.querySelector('[name="'+n+'"][value="'+d.vals[n]+'"]');
+      if (i) { i.checked = true; i.closest('.opt').classList.add('sel'); } });
+    if (d.cur > 1 && d.cur <= 6) cur = d.cur; } catch(e){} }
+
+  function stepHasAnswer(n){
+    var fs = steps[n-1];
+    return !!fs.querySelector('input[type="radio"]:checked');
+  }
+  function show(n){
+    cur = n;
+    steps.forEach(function(s,i){ s.classList.toggle('act', i === n-1); });
+    var isForm = n === 6;
+    var shown = Math.min(n, TOTAL_Q);
+    lbl.textContent = isForm ? 'Последний шаг' : 'Шаг ' + shown + ' из ' + TOTAL_Q;
+    fill.style.width = (isForm ? 100 : (shown-1) / TOTAL_Q * 100 + 8) + '%';
+    bBack.hidden = n === 1;
+    bNext.hidden = isForm; bSub.hidden = !isForm; consent.hidden = !isForm;
+    bNext.disabled = !isForm && !stepHasAnswer(n);
+    errEl.textContent = '';
+    if (!fired[n] && goals[n]) { fired[n] = 1; goal(goals[n]); }
+    save();
+  }
+
+  form.addEventListener('change', function(e){
+    if (e.target.type === 'radio') {
+      var fs = e.target.closest('.qstep');
+      fs.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('sel'); });
+      var op = e.target.closest('.opt'); if (op) op.classList.add('sel');
+      var ch = e.target.closest('.chip');
+      if (ch) { ch.parentElement.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('sel'); }); ch.classList.add('sel'); }
+      bNext.disabled = false; save();
+      if (cur <= TOTAL_Q && !ch) setTimeout(function(){ if (stepHasAnswer(cur)) show(cur+1); }, 350);
+    }
+  });
+  bNext.addEventListener('click', function(){ if (stepHasAnswer(cur)) show(cur+1);
+    else errEl.textContent = 'Выберите один вариант, чтобы продолжить.'; });
+  bBack.addEventListener('click', function(){ if (cur > 1) show(cur-1); });
+
+  form.addEventListener('submit', function(e){
+    var name = (form.elements.namedItem('Name').value||'').trim();
+    var phone = (form.elements.namedItem('Phone').value||'').replace(/\D/g,'');
+    if (name.length < 2) { e.preventDefault(); errEl.textContent = 'Укажите имя.'; return; }
+    if (phone.length < 10 || phone.length > 12) { e.preventDefault(); errEl.textContent = 'Укажите телефон, например +7 900 000-00-00.'; return; }
+    var ans = {};
+    ['q_when','q_priority','q_format','q_mortgage','q_contact_time'].forEach(function(n){
+      var c = form.querySelector('[name="'+n+'"]:checked'); if (c) ans[n] = c.value; });
+    form.elements.namedItem('quiz_answers').value = JSON.stringify(ans);
+    form.elements.namedItem('created_at').value = new Date().toISOString();
+    form.elements.namedItem('page_url').value = location.href;
+    errEl.textContent = ''; bSub.disabled = true; bSub.textContent = 'Отправляем…';
+  });
+
+  /* успех тильды → свой экран */
+  new MutationObserver(function(_, obs){
+    if (!form.classList.contains('js-send-form-success')) return;
+    goal('zapovedny_quiz_submit');
+    form.hidden = true;
+    root.querySelector('.qprog').style.display = 'none';
+    root.querySelector('[data-zp-succ]').classList.add('on');
+    try { localStorage.removeItem(S_KEY); } catch(e){}
+    obs.disconnect();
+  }).observe(form, {attributes:true, attributeFilter:['class']});
+
+  if (!window.tildaForm) {
+    var s = document.createElement('script');
+    s.src = 'https://static.tildacdn.com/js/tilda-forms-1.0.min.js'; s.async = true;
+    document.head.appendChild(s);
+  }
+
+  restore(); show(cur);
+})();
+</script>
+<style>.t-form-success-popup{display:none!important}</style>
